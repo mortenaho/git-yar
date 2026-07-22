@@ -10,9 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+# Omit flutter_test when pub.dev is blocked / offline cache is incomplete.
 
 flutter:
   uses-material-design: true
