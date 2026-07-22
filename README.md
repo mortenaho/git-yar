@@ -43,10 +43,13 @@ Enable the site once:
 
 ## Downloads
 
-CI builds **Linux** and **Windows** on every push to `main` (and on tags `v*`).
+**v1.0.0**
 
-- Artifacts: [Actions → Desktop builds](https://github.com/mortenaho/git-yar/actions/workflows/desktop-builds.yml)
-- Tagged releases (`v1.0.0`, …): assets are attached automatically
+- **Linux:** https://github.com/mortenaho/git-yar/releases/download/v1.0.0/git-yar-1.0.0-linux-x64.tar.gz
+- **Windows:** https://github.com/mortenaho/git-yar/releases/download/v1.0.0/git-yar-1.0.0-windows-x64.zip
+- All assets: https://github.com/mortenaho/git-yar/releases/tag/v1.0.0
+
+CI also builds on every push to `main`: [Desktop builds](https://github.com/mortenaho/git-yar/actions/workflows/desktop-builds.yml)
 
 ### Linux (local)
 
