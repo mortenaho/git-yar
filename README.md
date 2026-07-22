@@ -29,6 +29,12 @@ Professional desktop Git client built with Flutter.
 
 GitHub Pages: **https://mortenaho.github.io/git-yar/**
 
+Enable once (Settings → Pages):
+
+1. Open https://github.com/mortenaho/git-yar/settings/pages
+2. **Source:** Deploy from a branch *(not GitHub Actions)*
+3. **Branch:** `main` · **Folder:** `/docs` → **Save**
+
 ## Downloads
 
 CI builds **Linux** and **Windows** on every push to `main` (and on tags `v*`).
