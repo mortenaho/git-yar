@@ -1,10 +1,20 @@
-# گیت‌یار
+# Git Yar
 
-دستیار گیت دسکتاپ با Flutter — برنچ‌ها، وضعیت فایل‌ها، تاریخچه کامیت و کارهای روزمره.
+Professional desktop Git client built with Flutter.
+
+**See every branch. Ship every change.**
+
+## Screenshots
+
+### Welcome
+![Welcome screen](docs/screenshots/welcome.jpg)
+
+### Pro workspace
+![Pro workspace](docs/screenshots/workspace.jpg)
 
 ## Features
 
-- **Pro workspace only** (GitKraken-style)
+- **Pro workspace** (GitKraken-style)
   - Colored commit graph + right-click actions
   - Merge / Rebase / Cherry-pick / Reset / Tag
   - Pull (merge|rebase), Push / Force-with-lease
@@ -15,7 +25,11 @@
   - Staging + Commit
 - Open local repositories
 
-## اجرا
+## Website
+
+GitHub Pages: **https://mortenaho.github.io/git-yar/**
+
+## Run
 
 ```bash
 export PATH="$HOME/flutter/bin:$PATH"
@@ -24,15 +38,15 @@ flutter pub get
 flutter run -d linux
 ```
 
-اگر دسترسی به `pub.dev` نداشتید:
+If `pub.dev` is blocked:
 
 ```bash
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
 flutter pub get --offline
 ```
 
-## پیش‌نیاز
+## Requirements
 
 - Flutter 3.x
-- Git روی سیستم
-- برای انتخاب پوشه در لینوکس: `kdialog` یا `zenity`
+- Git on PATH
+- On Linux: `kdialog` or `zenity` for folder picker
