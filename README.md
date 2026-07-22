@@ -1,6 +1,6 @@
 # Git Yar
 
-Professional desktop Git client built with Flutter.
+Professional desktop Git client.
 
 **See every branch. Ship every change.**
 
