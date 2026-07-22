@@ -24,6 +24,65 @@ class GitService {
     return result.ok && result.stdout.trim() == 'true';
   }
 
+  /// Suggest a folder name from a clone URL (`…/repo.git` → `repo`).
+  static String suggestCloneFolderName(String url) {
+    var s = url.trim();
+    if (s.isEmpty) return 'repo';
+    while (s.endsWith('/')) {
+      s = s.substring(0, s.length - 1);
+    }
+    if (s.toLowerCase().endsWith('.git')) {
+      s = s.substring(0, s.length - 4);
+    }
+    final slash = s.lastIndexOf('/');
+    final colon = s.lastIndexOf(':');
+    final cut = slash > colon ? slash : colon;
+    final name = cut >= 0 && cut < s.length - 1 ? s.substring(cut + 1) : s;
+    final cleaned = name.replaceAll(RegExp(r'[^\w.\-]+'), '-').replaceAll(RegExp(r'-+'), '-');
+    if (cleaned.isEmpty || cleaned == '-' || cleaned == '.') return 'repo';
+    return cleaned;
+  }
+
+  /// Clone [url] into [destination] (full path). Parent folder must exist.
+  Future<GitCommandResult> clone(String url, String destination) async {
+    final uri = url.trim();
+    final dest = destination.trim();
+    if (uri.isEmpty) throw GitException('Repository URL is required.');
+    if (dest.isEmpty) throw GitException('Destination path is required.');
+
+    final destDir = Directory(dest);
+    final parent = destDir.parent;
+    if (!await parent.exists()) {
+      throw GitException('Parent folder does not exist: ${parent.path}');
+    }
+    if (await destDir.exists()) {
+      final empty = await destDir.list(followLinks: false).isEmpty;
+      if (!empty) {
+        throw GitException('Destination already exists and is not empty: $dest');
+      }
+    }
+
+    try {
+      final result = await Process.run(
+        'git',
+        ['clone', uri, dest],
+        workingDirectory: parent.path,
+        environment: {
+          ...Platform.environment,
+          'LANG': 'C',
+          'GIT_TERMINAL_PROMPT': '0',
+        },
+      );
+      return GitCommandResult(
+        exitCode: result.exitCode,
+        stdout: result.stdout.toString(),
+        stderr: result.stderr.toString(),
+      );
+    } on ProcessException catch (e) {
+      throw GitException('Unable to run git: ${e.message}');
+    }
+  }
+
   Future<GitRepoInfo> loadRepoInfo() async {
     final path = _requirePath();
     final segments = path.split(RegExp(r'[/\\]')).where((e) => e.isNotEmpty);

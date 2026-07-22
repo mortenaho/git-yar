@@ -79,6 +79,29 @@ class RepoController extends ChangeNotifier {
     }
   }
 
+  /// Clone [url] into [destination], then open the new repository.
+  Future<bool> cloneRepo({required String url, required String destination}) async {
+    error = null;
+    loading = true;
+    lastLog = null;
+    notifyListeners();
+    try {
+      final result = await _git.clone(url, destination);
+      lastLog = result.output.isEmpty ? 'Cloned into $destination' : result.output;
+      if (!result.ok) {
+        error = result.output.isEmpty ? 'Clone failed.' : result.output;
+        return false;
+      }
+    } on GitException catch (e) {
+      error = e.message;
+      return false;
+    } finally {
+      loading = false;
+      notifyListeners();
+    }
+    return openRepo(destination.trim());
+  }
+
   Future<void> refresh() async {
     if (_git.repoPath == null) return;
     error = null;
