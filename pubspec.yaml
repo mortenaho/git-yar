@@ -1,0 +1,27 @@
+name: git_yar
+description: دستیار گیت دسکتاپ — مشاهده برنچ‌ها، وضعیت و عملیات رایج گیت
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Vazirmatn
+      fonts:
+        - asset: assets/fonts/Vazirmatn-VF.ttf
+    - family: SourceCodePro
+      fonts:
+        - asset: assets/fonts/SourceCodePro-Regular.otf
+        - asset: assets/fonts/SourceCodePro-Bold.otf
+          weight: 700
