@@ -29,11 +29,17 @@ Professional desktop Git client built with Flutter.
 
 GitHub Pages: **https://mortenaho.github.io/git-yar/**
 
-Enable once (Settings → Pages):
+**Important:** do **not** use Source = GitHub Actions (that failed workflow is unrelated). Ignore the red Actions error.
 
-1. Open https://github.com/mortenaho/git-yar/settings/pages
-2. **Source:** Deploy from a branch *(not GitHub Actions)*
-3. **Branch:** `main` · **Folder:** `/docs` → **Save**
+Enable the site once:
+
+1. Open https://github.com/mortenaho/git-yar/settings/pages  
+2. Under **Build and deployment** set **Source** to **Deploy from a branch**  
+3. Branch: **`gh-pages`** · Folder: **`/ (root)`**  
+4. Click **Save**  
+5. Wait 1–2 minutes, then open https://mortenaho.github.io/git-yar/
+
+(Alternative: branch `main` + folder `/docs` also works.)
 
 ## Downloads
 
