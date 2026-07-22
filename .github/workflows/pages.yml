@@ -1,0 +1,61 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enable GitHub Pages (Actions source)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          # Create site with Actions publishing, or update existing site.
+          gh api repos/"${GITHUB_REPOSITORY}"/pages -X POST -f build_type=workflow
+          if [ $? -ne 0 ]; then
+            gh api repos/"${GITHUB_REPOSITORY}"/pages -X PUT -f build_type=workflow
+          fi
+          # Fallback: classic publish from /docs on main (no Actions deploy needed).
+          if [ $? -ne 0 ]; then
+            gh api repos/"${GITHUB_REPOSITORY}"/pages -X POST \
+              -f build_type=legacy \
+              -F source[branch]=main \
+              -F source[path]=/docs \
+            || gh api repos/"${GITHUB_REPOSITORY}"/pages -X PUT \
+              -f build_type=legacy \
+              -F source[branch]=main \
+              -F source[path]=/docs
+          fi
+          echo "Pages config:"
+          gh api repos/"${GITHUB_REPOSITORY}"/pages || true
+
+      - uses: actions/configure-pages@v5
+        continue-on-error: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
