@@ -29,11 +29,30 @@ Professional desktop Git client built with Flutter.
 
 GitHub Pages: **https://mortenaho.github.io/git-yar/**
 
-## Run
+## Downloads
+
+CI builds **Linux** and **Windows** on every push to `main` (and on tags `v*`).
+
+- Artifacts: [Actions → Desktop builds](https://github.com/mortenaho/git-yar/actions/workflows/desktop-builds.yml)
+- Tagged releases (`v1.0.0`, …): assets are attached automatically
+
+### Linux (local)
+
+```bash
+./scripts/build_linux.sh
+# → dist/git-yar-1.0.0-linux-x64.tar.gz
+```
+
+Unpack and run `git_yar` from the bundle folder (needs GTK / system Git).
+
+### Windows
+
+Built on GitHub Actions (`windows-latest`). Download the `git-yar-*-windows-x64.zip` artifact, unpack, run `git_yar.exe`. Git must be on PATH.
+
+## Run (dev)
 
 ```bash
 export PATH="$HOME/flutter/bin:$PATH"
-cd /home/mortenaho/Projects/git-yar
 flutter pub get
 flutter run -d linux
 ```
