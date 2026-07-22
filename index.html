@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Git Yar — Professional Desktop Git Client</title>
+  <meta name="description" content="Git Yar is a desktop Git client with commit graph, diffs, conflict resolver, and professional reports." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #12151c;
+      --border: #2a3140;
+      --text: #f2f4f8;
+      --muted: #8b95a8;
+      --accent: #3ddc97;
+      --accent2: #5b8cff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 40% at 15% 20%, rgba(61,220,151,.12), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 85% 70%, rgba(91,140,255,.12), transparent 60%);
+      z-index: 0;
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .brand {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .accent-line {
+      width: 52px;
+      height: 3px;
+      margin: 14px 0 16px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .tagline {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .desc {
+      color: var(--muted);
+      max-width: 38rem;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 18px;
+      border-radius: 12px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    a.btn:hover { transform: translateY(-1px); }
+    a.btn-primary {
+      background: var(--accent);
+      color: #06140f;
+    }
+    a.btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--panel);
+    }
+    section { margin-top: 56px; }
+    h2 {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .shot {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      margin-bottom: 28px;
+    }
+    .shot figcaption {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    .card p { color: var(--muted); font-size: 0.92rem; }
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.85em;
+      color: var(--accent2);
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="brand">Git Yar</div>
+        <div class="accent-line"></div>
+        <p class="tagline">See every branch. Ship every change.</p>
+        <p class="desc">
+          A desktop Git client with a professional commit graph, file diffs,
+          conflict resolver, and analytics reports.
+        </p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/mortenaho/git-yar/releases/download/v1.0.0/git-yar-1.0.0-linux-x64.tar.gz">Download Linux</a>
+        <a class="btn btn-ghost" href="https://github.com/mortenaho/git-yar/releases/download/v1.0.0/git-yar-1.0.0-windows-x64.zip">Download Windows</a>
+        <a class="btn btn-ghost" href="https://github.com/mortenaho/git-yar/releases/tag/v1.0.0">All releases</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Downloads — v1.0.0</h2>
+      <div class="features">
+        <div class="card">
+          <strong>Linux x64</strong>
+          <p><code>git-yar-1.0.0-linux-x64.tar.gz</code> (~10 MB). Unpack and run <code>git_yar</code>.</p>
+          <p style="margin-top:10px"><a class="btn btn-primary" href="https://github.com/mortenaho/git-yar/releases/download/v1.0.0/git-yar-1.0.0-linux-x64.tar.gz">Download Linux</a></p>
+        </div>
+        <div class="card">
+          <strong>Windows x64</strong>
+          <p><code>git-yar-1.0.0-windows-x64.zip</code> (~12 MB). Unpack and run <code>git_yar.exe</code>.</p>
+          <p style="margin-top:10px"><a class="btn btn-ghost" href="https://github.com/mortenaho/git-yar/releases/download/v1.0.0/git-yar-1.0.0-windows-x64.zip">Download Windows</a></p>
+        </div>
+      </div>
+      <p style="margin-top:14px;color:var(--muted);font-size:0.9rem">Requires Git installed and available on PATH.</p>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <figure class="shot">
+        <img src="screenshots/welcome.jpg" alt="Git Yar welcome screen" width="1280" height="800" />
+        <figcaption>Welcome — open a local repository to start</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/clone.jpg" alt="Git Yar clone repository screen" width="1280" height="800" />
+        <figcaption>Clone — paste a remote URL and choose a destination</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/workspace.jpg" alt="Git Yar Pro workspace" width="1440" height="900" />
+        <figcaption>Pro workspace — graph, file list, diff editor, and staging</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/graph.jpg" alt="Git Yar commit graph" width="1440" height="900" />
+        <figcaption>Commit graph — branch lanes, refs, and history actions</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Highlights</h2>
+      <div class="features">
+        <div class="card">
+          <strong>Commit graph</strong>
+          <p>Visual history with branch lanes, refs, and context actions.</p>
+        </div>
+        <div class="card">
+          <strong>Diff &amp; editor</strong>
+          <p>Per-file changes with syntax highlighting and fullscreen mode.</p>
+        </div>
+        <div class="card">
+          <strong>Conflicts</strong>
+          <p>Resolve merge/rebase conflicts with ours/theirs and hunk tools.</p>
+        </div>
+        <div class="card">
+          <strong>Reports</strong>
+          <p>Activity charts, contributors, hot files, Markdown export.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Linux &amp; Windows</span>
+      <span><code>mortenaho/git-yar</code></span>
+    </footer>
+  </div>
+</body>
+</html>
